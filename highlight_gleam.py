@@ -1,7 +1,8 @@
 import sys
 from pygments import highlight
-from pygments.formatters import TerminalFormatter
-from pygments.lexers.gleam import GleamLexer  # Make sure this file is in the same directory or installed as a package
+from pygments.formatters import Terminal256Formatter
+from pygments.lexers.gleam import GleamLexer
+from pygments.styles import get_style_by_name
 
 def highlight_gleam_file(file_path):
     # Read the contents of the .gleam file
@@ -17,7 +18,8 @@ def highlight_gleam_file(file_path):
 
     # Use Pygments to highlight the code
     lexer = GleamLexer()
-    formatter = TerminalFormatter()
+    style = get_style_by_name('github')
+    formatter = Terminal256Formatter(style=style)
     highlighted_code = highlight(code, lexer, formatter)
     
     # Print the highlighted code to the terminal
